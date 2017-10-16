@@ -11,23 +11,20 @@ services:
       - "9092:9092"
     environment:
       KAFKA_ADVERTISED_HOST_NAME: docker.for.mac.localhost
-      KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_CREATE_TOPICS: "logstash_logs:1:1"
     links:
       - zookeeper
-    # volumes:
-    #   - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-    # command: /opt/kafka/bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic logstash_logs
     container_name: kafka
   logstash:
-    image: halosan/logstash:5.5
+    image: docker.elastic.co/logstash/logstash:5.6.3
     ports:
       - "10000:10000"
     links:
       - kafka
-    # volumes:
-    #   - ./logstash_settings/:/usr/share/logstash/config/
-    #   - ./logstash_pipeline/:/usr/share/logstash/pipeline/
+    volumes:
+      - ./logstash_settings/:/usr/share/logstash/config/
+      - ./logstash_pipeline/:/usr/share/logstash/pipeline/
     container_name: logstash
