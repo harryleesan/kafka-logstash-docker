@@ -2,7 +2,7 @@
 
 for number in {1..100}
 do
-    echo 'Hello' | nc localhost 10000
+    curl -X POST -d @test.json http://localhost:10000 --header "Content-Type:application/json"
 done
 
 exit 0

@@ -40,10 +40,10 @@ To see it in action:
 - Open up a second terminal session and run:
 
   ```bash
-  echo "Hello world" | nc localhost 10000
+  curl -X POST -d @test.json http://localhost:10000 --header "Content-Type:application/json"
   ```
 
-  Ensure that `netcat` is installed
+  Ensure that `curl` is installed
 
 - You should be able to see **Hello world** in the first terminal session.
 
