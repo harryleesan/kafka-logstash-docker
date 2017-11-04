@@ -1,7 +1,5 @@
 # `docker-compose` for Kafka, Zookeeper and Logstash
 
-### Author: Harry Lee
-
 This set up is merely a demonstration for pushing logs to **Logstash**
 which then pushes the logs to a **Kafka** topic.
 
@@ -43,15 +41,19 @@ To see it in action:
   curl -X POST -d @test.json http://localhost:10000 --header "Content-Type:application/json"
   ```
 
-  Ensure that `curl` is installed
+  Ensure that `curl` is installed.
 
-- You should be able to see **Hello world** in the first terminal session.
+- You should be able to see a concise HTTP request in the form of an _json_ object coming through in the first
+  terminal session.
 
-Now you can stream logs to **localhost:10000** and see it in kafka.
+Now you can stream logs to **localhost:10000** and see it in **Kafka**.
 
 ## Configuration
 
-The configurations for **Logstash** can be found in _logstash_pipeline_ and
-_logstash_settings_.
+The configurations for **Logstash** is in the _logstash_pipeline_ and
+_logstash_settings_ folders.
 
 You can modify the settings before running `docker-compose up -d`.
+
+In this demonstration, a **Http input plugin** and a **Kafka output plugin** using
+the _json codec_ are used.
